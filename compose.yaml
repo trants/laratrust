@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  golang:
+    container_name: golang
+    restart: always
+    ports:
+      - "8080:8080"
+    image: vnspc/golang:1.22
+    volumes:
+      - .:/var/www:cached
+    networks:
+      - network-bridge
+
+networks:
+  network-bridge:
+    driver: bridge
+    name: network-bridge
