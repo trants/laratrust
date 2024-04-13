@@ -1,6 +1,27 @@
 version: "3.9"
 
 services:
+  nginx:
+    container_name: nginx
+    restart: always
+    image: vnspc/nginx:1.25
+    ports:
+      - ${NGINX_PORT:-80}:80
+      - ${NGINX_HTTPS_PORT:-443}:443
+    volumes: &appvolumes
+      - ./docker/nginx/sites-enabled:/etc/nginx/conf.d
+      - .:/var/www:cached
+      - ~/.ssh/id_rsa:/var/www/.ssh/id_rsa:cached
+      - ~/.ssh/known_hosts:/var/www/.ssh/known_hosts:cached
+      - sock-data:/sock
+      - ssl-data:/etc/nginx/certs
+    depends_on:
+      - golang
+    extra_hosts: &appextrahosts
+      - "*:172.17.0.1"
+    networks:
+      - network-bridge
+
   golang:
     container_name: golang
     restart: always
@@ -11,6 +32,10 @@ services:
       - .:/var/www:cached
     networks:
       - network-bridge
+
+volumes:
+  sock-data:
+  ssl-data:
 
 networks:
   network-bridge:
