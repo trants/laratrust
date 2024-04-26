@@ -1,0 +1,68 @@
+{
+  "name": "vspc/laratrust",
+  "description": "PHP 8.0+ fully-featured authentication & authorization system",
+  "keywords": [
+    "auth",
+    "laravel",
+    "php",
+    "security",
+    "trants",
+    "trust",
+    "vspc"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Son Tran Thanh",
+      "email": "286.trants@gmail.com",
+      "homepage": "https://trants.me"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "vspc/support": "^11.0"
+  },
+  "require-dev": {
+    "vspc/php-cs-fixer": "^3.0"
+  },
+  "scripts": {
+    "cs:check": "./vendor/bin/php-cs-fixer fix --verbose --ansi --show-progress=dots --diff --dry-run",
+    "cs:fix": "./vendor/bin/php-cs-fixer fix --verbose --ansi --show-progress=dots",
+    "test": "./vendor/bin/phpunit --verbose --colors=always"
+  },
+  "suggest": {
+    "illuminate/database": "By default, Laratrust utilizes the powerful Illuminate database layer.",
+    "illuminate/events": "To hook into various events across Laratrust, we recommend using Illuminate's event dispatcher.",
+    "symfony/http-foundation": "Required for native implementations."
+  },
+  "autoload": {
+    "psr-4": {
+      "Vspc\\Laratrust\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Vspc\\Laratrust\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "11.0.x-dev"
+    },
+    "laravel": {
+      "providers": [
+        "Vspc\\Laratrust\\Laravel\\LaratrustServiceProvider"
+      ],
+      "aliases": {
+        "Activation": "Vspc\\Laratrust\\Laravel\\Facades\\Activation",
+        "Reminder": "Vspc\\Laratrust\\Laravel\\Facades\\Reminder",
+        "Laratrust": "Vspc\\Laratrust\\Laravel\\Facades\\Laratrust"
+      }
+    }
+  }
+}
