@@ -23,6 +23,14 @@
     "vspc/support": "^11.0"
   },
   "require-dev": {
+    "illuminate/cookie": "^11.0",
+    "illuminate/database": "^11.0",
+    "illuminate/events": "^11.0",
+    "illuminate/http": "^11.0",
+    "illuminate/session": "^11.0",
+    "illuminate/support": "^11.0",
+    "mockery/mockery": "^1.6",
+    "phpunit/phpunit": "^11.1",
     "vspc/php-cs-fixer": "^3.0"
   },
   "scripts": {
