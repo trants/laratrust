@@ -18,7 +18,7 @@ class WhirlpoolHasher implements HasherInterface
     use Hasher;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function hash(string $value): string
     {
@@ -28,7 +28,7 @@ class WhirlpoolHasher implements HasherInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function check(string $value, string $hashedValue): bool
     {
