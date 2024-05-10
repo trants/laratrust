@@ -159,7 +159,7 @@ class Laratrust
             throw new \InvalidArgumentException('You must provide a closure or a boolean.');
         }
 
-        $this->fireEvent('sentinel.registering', [$credentials]);
+        $this->fireEvent('laratrust.registering', [$credentials]);
 
         $valid = $this->users->validForCreation($credentials);
 
@@ -175,7 +175,7 @@ class Laratrust
             $this->activate($user);
         }
 
-        $this->fireEvent('sentinel.registered', $user);
+        $this->fireEvent('laratrust.registered', $user);
 
         return $user;
     }
@@ -215,13 +215,13 @@ class Laratrust
             throw new \InvalidArgumentException('No valid user was provided.');
         }
 
-        $this->fireEvent('sentinel.activating', $user);
+        $this->fireEvent('laratrust.activating', $user);
 
         $activations = $this->getActivationRepository();
 
         $activation = $activations->create($user);
 
-        $this->fireEvent('sentinel.activated', [$user, $activation]);
+        $this->fireEvent('laratrust.activated', [$user, $activation]);
 
         return $activations->complete($user, $activation->getCode());
     }
@@ -259,8 +259,8 @@ class Laratrust
      */
     public function forceCheck()
     {
-        return $this->bypassCheckpoints(function ($sentinel) {
-            return $sentinel->check();
+        return $this->bypassCheckpoints(function ($laratrust) {
+            return $laratrust->check();
         });
     }
 
@@ -285,7 +285,7 @@ class Laratrust
      */
     public function authenticate($credentials, bool $remember = false, bool $login = true)
     {
-        $response = $this->fireEvent('sentinel.authenticating', [$credentials], true);
+        $response = $this->fireEvent('laratrust.authenticating', [$credentials], true);
 
         if ($response === false) {
             return false;
@@ -315,7 +315,7 @@ class Laratrust
             }
         }
 
-        $this->fireEvent('sentinel.authenticated', $user);
+        $this->fireEvent('laratrust.authenticated', $user);
 
         return $this->user = $user;
     }
@@ -342,8 +342,8 @@ class Laratrust
      */
     public function forceAuthenticate($credentials, bool $remember = false)
     {
-        return $this->bypassCheckpoints(function ($sentinel) use ($credentials, $remember) {
-            return $sentinel->authenticate($credentials, $remember);
+        return $this->bypassCheckpoints(function ($laratrust) use ($credentials, $remember) {
+            return $laratrust->authenticate($credentials, $remember);
         });
     }
 
@@ -489,7 +489,7 @@ class Laratrust
      */
     public function login(UserInterface $user, bool $remember = false)
     {
-        $this->fireEvent('sentinel.logging-in', $user);
+        $this->fireEvent('laratrust.logging-in', $user);
 
         $this->persistences->persist($user, $remember);
 
@@ -499,7 +499,7 @@ class Laratrust
             return false;
         }
 
-        $this->fireEvent('sentinel.logged-in', $user);
+        $this->fireEvent('laratrust.logged-in', $user);
 
         return $this->user = $user;
     }
@@ -528,12 +528,12 @@ class Laratrust
     {
         $currentUser = $this->check();
 
-        $this->fireEvent('sentinel.logging-out', $user);
+        $this->fireEvent('laratrust.logging-out', $user);
 
         if ($user && $user !== $currentUser) {
             $this->persistences->flush($user, false);
 
-            $this->fireEvent('sentinel.logged-out', $user);
+            $this->fireEvent('laratrust.logged-out', $user);
 
             return true;
         }
@@ -541,7 +541,7 @@ class Laratrust
         $user = $user ?: $currentUser;
 
         if ($user === false) {
-            $this->fireEvent('sentinel.logged-out', $user);
+            $this->fireEvent('laratrust.logged-out', $user);
 
             return true;
         }
@@ -552,7 +552,7 @@ class Laratrust
 
         $this->user = null;
 
-        $this->fireEvent('sentinel.logged-out', $user);
+        $this->fireEvent('laratrust.logged-out', $user);
 
         return $this->users->recordLogout($user);
     }

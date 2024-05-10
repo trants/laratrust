@@ -122,7 +122,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     protected static $throttlingModel = EloquentThrottle::class;
 
     /**
-     * Returns the activation relationship.
+     * Returns the activations relationship.
      *
      * @return HasMany
      */
@@ -132,7 +132,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     }
 
     /**
-     * Returns the persistence relationship.
+     * Returns the persistences relationship.
      *
      * @return HasMany
      */
@@ -142,7 +142,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     }
 
     /**
-     * Returns the reminder relationship.
+     * Returns the reminders relationship.
      *
      * @return HasMany
      */

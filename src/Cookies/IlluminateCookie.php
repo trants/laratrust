@@ -37,7 +37,7 @@ class IlluminateCookie implements CookieInterface
      *
      * @var string
      */
-    protected $key = 'Vspc_Laratrust';
+    protected $key = 'vspc_Laratrust';
 
     /**
      * Constructor.

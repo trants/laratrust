@@ -45,8 +45,8 @@ interface ThrottleRepositoryInterface
     /**
      * Logs a new throttling entry.
      *
-     * @param string|null        $ipAddress
-     * @param UserInterface|null $user
+     * @param string        $ipAddress
+     * @param UserInterface $user
      *
      * @return void
      */

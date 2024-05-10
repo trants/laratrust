@@ -168,7 +168,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     {
         $user = $this->createModel();
 
-        $this->fireEvent('sentinel.user.creating', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.creating', compact('user', 'credentials'));
 
         $this->fill($user, $credentials);
 
@@ -182,7 +182,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
 
         $user->save();
 
-        $this->fireEvent('sentinel.user.created', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.created', compact('user', 'credentials'));
 
         return $user;
     }
@@ -196,13 +196,13 @@ class IlluminateUserRepository implements UserRepositoryInterface
             $user = $this->findById($user);
         }
 
-        $this->fireEvent('sentinel.user.updating', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.updating', compact('user', 'credentials'));
 
         $this->fill($user, $credentials);
 
         $user->save();
 
-        $this->fireEvent('sentinel.user.updated', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.updated', compact('user', 'credentials'));
 
         return $user;
     }
@@ -217,7 +217,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
      */
     public function fill(UserInterface $user, array $credentials): void
     {
-        $this->fireEvent('sentinel.user.filling', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.filling', compact('user', 'credentials'));
 
         $loginNames = $user->getLoginNames();
 
@@ -243,7 +243,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
             ]);
         }
 
-        $this->fireEvent('sentinel.user.filled', compact('user', 'credentials'));
+        $this->fireEvent('laratrust.user.filled', compact('user', 'credentials'));
     }
 
     /**

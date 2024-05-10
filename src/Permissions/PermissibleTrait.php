@@ -83,7 +83,7 @@ trait PermissibleTrait
     abstract protected function createPermissions(): PermissionsInterface;
 
     /**
-     *  @inheritdoc
+     * @inheritdoc
      */
     public function getPermissionsInstance(): PermissionsInterface
     {
